@@ -24,8 +24,8 @@
                 <!-- 帖子列表区域 -->
             </div>
             <form id="forum-post-form">
-                <input type="text" id="post-title" placeholder="话题标题">
-                <textarea id="post-content" placeholder="话题内容"></textarea>
+                <input type="text" id="post-title" placeholder="话题标题" required>
+                <textarea id="post-content" placeholder="话题内容" required></textarea>
                 <input type="file" id="post-image">
                 <button type="submit">发布话题</button>
             </form>
@@ -43,13 +43,17 @@
 
         // 添加论坛话题事件
         document.getElementById('forum-post-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // 阻止表单默认提交行为
+            // 提取表单数据
             const title = document.getElementById('post-title').value.trim();
             const content = document.getElementById('post-content').value.trim();
             const imageFile = document.getElementById('post-image').files[0];
 
+            // 检查是否所有必填字段都有值
             if (title !== '' && content !== '') {
+                // 调用添加帖子函数
                 addForumPost(title, content, 'Alice', imageFile); // 假设作者为 Alice
+                // 清空表单字段
                 document.getElementById('post-title').value = '';
                 document.getElementById('post-content').value = '';
                 document.getElementById('post-image').value = '';
@@ -61,15 +65,15 @@
         // 添加论坛话题
         function addForumPost(title, content, author, imageFile) {
             const post = { title, content, author, imageFile };
-            forumPosts.push(post);
-            localStorage.setItem('forumPosts', JSON.stringify(forumPosts));
-            renderForumPosts(); // 更新帖子列表
+            forumPosts.push(post); // 将新帖子添加到数组
+            localStorage.setItem('forumPosts', JSON.stringify(forumPosts)); // 更新 localStorage 中的数据
+            renderForumPosts(); // 重新渲染帖子列表
         }
 
-        // 渲染帖子列表
+        // 渲染帖子列表函数
         function renderForumPosts() {
             const forumPostsContainer = document.getElementById('forum-posts');
-            forumPostsContainer.innerHTML = '';
+            forumPostsContainer.innerHTML = ''; // 清空现有内容
             forumPosts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('forum-post');
@@ -84,11 +88,10 @@
                     imgElement.alt = '上传的图片';
                     postElement.appendChild(imgElement);
                 }
-                forumPostsContainer.appendChild(postElement);
+                forumPostsContainer.appendChild(postElement); // 将帖子元素添加到容器中
             });
         }
     </script>
 </body>
 </html>
-
 
