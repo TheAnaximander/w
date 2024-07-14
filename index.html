@@ -47,7 +47,7 @@
             // 提取表单数据
             const title = document.getElementById('post-title').value.trim();
             const content = document.getElementById('post-content').value.trim();
-            const imageFile = document.getElementById('post-image').files[0];
+            const imageFile = document.getElementById('post-image').files[0]; // 获取上传的文件
 
             // 检查是否所有必填字段都有值
             if (title !== '' && content !== '') {
@@ -56,7 +56,7 @@
                 // 清空表单字段
                 document.getElementById('post-title').value = '';
                 document.getElementById('post-content').value = '';
-                document.getElementById('post-image').value = '';
+                document.getElementById('post-image').value = ''; // 清空文件输入字段
             } else {
                 alert('请输入话题标题和内容！');
             }
