@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friendship Talks</title>
     <style>
-        /* CSS 样式略，保持与您之前的样式一致 */
+        /* 样式略，保持与您之前的样式一致 */
     </style>
 </head>
 <body>
@@ -33,12 +33,7 @@
     </div>
 
     <script>
-        // 检查 localStorage 是否支持
-        if (!window.localStorage) {
-            alert('您的浏览器不支持本地存储功能，请升级浏览器或者使用其他浏览器！');
-        }
-
-        // 初始化帖子数据
+        // 初始化帖子数据，使用 localStorage 或者空数组
         let forumPosts = JSON.parse(localStorage.getItem('forumPosts')) || [];
 
         // 在页面加载后渲染帖子
