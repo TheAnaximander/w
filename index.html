@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friendship Talks</title>
     <style>
-        /* 样式略，保持与您之前的样式一致 */
+        /* CSS 样式部分略 */
     </style>
 </head>
 <body>
@@ -13,16 +13,34 @@
         <h1>Friendship Talks</h1>
         <nav>
             <ul>
-                <!-- 导航链接 -->
+                <li><a href="#">聊天</a></li>
+                <li><a href="#">论坛</a></li>
+                <li><a href="#">日历</a></li>
+                <li><button onclick="toggleLanguage()">切换语言</button></li>
+                <li><button class="logout-button" onclick="logout()">退出登录</button></li>
             </ul>
         </nav>
     </header>
     <div class="container">
-        <section id="forum-section" class="module">
+        <!-- 登录注册部分 -->
+        <section id="login-register-section" class="module">
+            <h2>登录或注册</h2>
+            <form id="register-form">
+                <input type="text" id="username-input" placeholder="用户名">
+                <input type="password" id="password-input" placeholder="密码">
+                <button type="submit">注册</button>
+            </form>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="用户名">
+                <input type="password" id="login-password" placeholder="密码">
+                <button type="submit">登录</button>
+            </form>
+        </section>
+
+        <!-- 论坛模块 -->
+        <section id="forum-section" class="module" style="display: none;">
             <h2>论坛功能</h2>
-            <div id="forum-posts">
-                <!-- 帖子列表区域 -->
-            </div>
+            <div id="forum-posts"></div>
             <form id="forum-post-form">
                 <input type="text" id="post-title" placeholder="话题标题" required>
                 <textarea id="post-content" placeholder="话题内容" required></textarea>
@@ -33,47 +51,97 @@
     </div>
 
     <script>
-        // 初始化帖子数据，使用 localStorage 或者空数组
-        let forumPosts = JSON.parse(localStorage.getItem('forumPosts')) || [];
+        // 用户数据库
+        let userDatabase = ['Alice', 'Bob'];
 
-        // 在页面加载后渲染帖子
+        // 论坛帖子数组
+        let forumPosts = [];
+
+        // 模拟初始帖子
+        forumPosts.push({
+            title: '示例话题标题',
+            content: '示例话题内容',
+            author: 'Alice',
+            imageFile: null  // 可以是一个实际的 File 对象或 null
+        });
+
+        // DOM 加载完毕后执行
         document.addEventListener('DOMContentLoaded', function() {
+            // 登录表单提交事件
+            document.getElementById('login-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const username = document.getElementById('login-username').value.trim();
+                const password = document.getElementById('login-password').value.trim();
+
+                if (username === 'Alice' && password === '123456') {
+                    login(username);
+                } else {
+                    alert('用户名或密码错误！');
+                }
+            });
+
+            // 注册表单提交事件
+            document.getElementById('register-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const usernameInput = document.getElementById('username-input').value.trim();
+                const passwordInput = document.getElementById('password-input').value.trim();
+
+                if (usernameInput !== '' && passwordInput !== '') {
+                    if (!userDatabase.includes(usernameInput)) {
+                        userDatabase.push(usernameInput);
+                        alert('注册成功！');
+                        login(usernameInput);
+                    } else {
+                        alert('用户名已存在，请选择其他用户名！');
+                    }
+                } else {
+                    alert('请输入用户名和密码！');
+                }
+            });
+
+            // 论坛发布帖子事件
+            document.getElementById('forum-post-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const title = document.getElementById('post-title').value.trim();
+                const content = document.getElementById('post-content').value.trim();
+                const imageFile = document.getElementById('post-image').files[0];
+
+                if (title !== '' && content !== '') {
+                    addForumPost(title, content, 'Alice', imageFile);
+                    document.getElementById('post-title').value = '';
+                    document.getElementById('post-content').value = '';
+                    document.getElementById('post-image').value = '';
+                } else {
+                    alert('请输入话题标题和内容！');
+                }
+            });
+
+            // 初始化渲染帖子
             renderForumPosts();
         });
 
-        // 添加论坛话题事件
-        document.getElementById('forum-post-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // 阻止表单默认提交行为
-            // 提取表单数据
-            const title = document.getElementById('post-title').value.trim();
-            const content = document.getElementById('post-content').value.trim();
-            const imageFile = document.getElementById('post-image').files[0]; // 获取上传的文件
+        // 登录函数
+        function login(username) {
+            alert(`欢迎回来，${username}！`);
+            showLoggedInModules();
+        }
 
-            // 检查是否所有必填字段都有值
-            if (title !== '' && content !== '') {
-                // 调用添加帖子函数
-                addForumPost(title, content, 'Alice', imageFile); // 假设作者为 Alice
-                // 清空表单字段
-                document.getElementById('post-title').value = '';
-                document.getElementById('post-content').value = '';
-                document.getElementById('post-image').value = ''; // 清空文件输入字段
-            } else {
-                alert('请输入话题标题和内容！');
-            }
-        });
-
-        // 添加论坛话题
+        // 添加论坛帖子
         function addForumPost(title, content, author, imageFile) {
             const post = { title, content, author, imageFile };
-            forumPosts.push(post); // 将新帖子添加到数组
-            localStorage.setItem('forumPosts', JSON.stringify(forumPosts)); // 更新 localStorage 中的数据
+            forumPosts.push(post); // 将新帖子添加到数组中
+
+            // 更新 localStorage 中的数据
+            localStorage.setItem('forumPosts', JSON.stringify(forumPosts));
+
             renderForumPosts(); // 重新渲染帖子列表
         }
 
-        // 渲染帖子列表函数
+        // 渲染论坛帖子
         function renderForumPosts() {
             const forumPostsContainer = document.getElementById('forum-posts');
             forumPostsContainer.innerHTML = ''; // 清空现有内容
+
             forumPosts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.classList.add('forum-post');
@@ -82,14 +150,36 @@
                     <p>${post.content}</p>
                     <p>作者: ${post.author}</p>
                 `;
+
                 if (post.imageFile) {
                     const imgElement = document.createElement('img');
                     imgElement.src = URL.createObjectURL(post.imageFile);
                     imgElement.alt = '上传的图片';
                     postElement.appendChild(imgElement);
                 }
+
                 forumPostsContainer.appendChild(postElement); // 将帖子元素添加到容器中
             });
+        }
+
+        // 显示登录后的模块
+        function showLoggedInModules() {
+            document.getElementById('login-register-section').style.display = 'none';
+            document.getElementById('forum-section').style.display = 'block';
+        }
+
+        // 退出登录
+        function logout() {
+            alert('已退出登录！');
+            document.getElementById('login-register-section').style.display = 'block';
+            document.getElementById('forum-section').style.display = 'none';
+        }
+
+        // 切换语言示例
+        let language = '中文';
+        function toggleLanguage() {
+            language = language === '中文' ? 'English' : '中文';
+            alert(`切换语言到${language}`);
         }
     </script>
 </body>
