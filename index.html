@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Friendship talks</title>
+    <title>Friendship Talks</title>
     <style>
         /* Reset default browser styles */
         body, h1, h2, h3, p, ul, li, button, input, textarea {
@@ -173,19 +173,19 @@
         .contact-item button:hover {
             background-color: #3b5998;
         }
-
+        
         /* Responsive design */
         @media only screen and (max-width: 768px) {
             /* Styles for mobile and small screens */
             body {
                 font-size: 14px;
             }
-
+    
             .container {
                 padding: 10px;
             }
         }
-
+    
         @media only screen and (min-width: 769px) {
             /* Styles for large screens (e.g., computers) */
             .container {
@@ -197,132 +197,151 @@
     </style>
 </head>
 <body>
-
-<header>
-    <h1>Friendship Talks</h1>
-    <nav>
-        <ul>
-            <li><a href="#">聊天</a></li>
-            <li><a href="#">论坛</a></li>
-            <li><a href="#">日历</a></li>
-            <li><button onclick="toggleLanguage()">切换语言</button></li>
-            <li><button class="logout-button" onclick="logout()">退出登录</button></li>
-        </ul>
-    </nav>
-</header>
-
-<div class="container">
-    <section id="login-register-section" class="module">
-        <h2>登录或注册</h2>
-        <form id="login-form">
-            <input type="text" id="username" placeholder="用户名">
-            <input type="password" id="password" placeholder="密码">
-            <button type="submit">登录</button>
-        </form>
-        <form id="register-form">
-            <input type="text" id="new-username" placeholder="新用户名">
-            <input type="password" id="new-password" placeholder="新密码">
-            <button type="submit">注册</button>
-        </form>
-    </section>
-
-    <section id="chat-section" class="module">
-        <h2>聊天</h2>
-        <div id="chat-box"></div>
-        <form id="message-form">
-            <input type="text" id="message-input" placeholder="输入消息">
-            <button type="submit">发送</button>
-        </form>
-    </section>
-
-    <section id="forum-section" class="module">
-        <h2>论坛</h2>
-        <div id="forum-posts"></div>
-        <form id="post-form">
-            <input type="text" id="post-title" placeholder="帖子标题">
-            <textarea id="post-content" placeholder="帖子内容"></textarea>
-            <input type="text" id="post-author" placeholder="作者">
-            <input type="file" id="post-image" accept="image/*">
-            <button type="submit">发布帖子</button>
-        </form>
-    </section>
-
-    <section id="bitcoin-transfer-section" class="module">
-        <h2>比特币转账</h2>
-        <form id="bitcoin-transfer-form">
-            <input type="text" id="bitcoin-recipient" placeholder="接收者">
-            <input type="text" id="bitcoin-amount" placeholder="金额">
-            <button type="submit">转账</button>
-        </form>
-    </section>
-
-    <section id="link-forward-section" class="module">
-        <h2>链接转发</h2>
-        <form id="link-forward-form">
-            <input type="text" id="link-recipient" placeholder="接收者">
-            <input type="text" id="link-url" placeholder="链接 URL">
-            <input type="file" id="link-file" accept="*">
-            <button type="submit">发送</button>
-        </form>
-    </section>
-
-    <!-- 群聊模块 -->
-    <section id="group-chat-section" class="module">
-        <h2>群聊</h2>
-        <div id="group-chat-box">
-            <div class="message">
-                <span class="user">Alice:</span>
-                <span class="content">你好吗？</span>
+    <header>
+        <h1>Friendship Talks</h1>
+        <nav>
+            <ul>
+                <li><a href="#">聊天</a></li>
+                <li><a href="#">论坛</a></li>
+                <li><a href="#">日历</a></li>
+                <li><button onclick="toggleLanguage()">切换语言</button></li>
+                <li><button class="logout-button" onclick="logout()">退出登录</button></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <section id="login-register-section" class="module">
+            <h2>登录或注册</h2>
+            <form id="register-form">
+                <input type="text" id="username-input" placeholder="用户名">
+                <input type="password" id="password-input" placeholder="密码">
+                <button type="submit">注册</button>
+            </form>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="用户名">
+                <input type="password" id="login-password" placeholder="密码">
+                <button type="submit">登录</button>
+            </form>
+        </section>
+    
+        <section id="chat-section" class="module">
+            <!-- 聊天模块内容 -->
+            <h2>聊天功能</h2>
+            <div id="group-chat-box">
+                <!-- 群聊消息显示区域 -->
             </div>
-            <div class="message">
-                <span class="user">Bob:</span>
-                <span class="content">很好，谢谢！</span>
-            </div>
-            <!-- Messages will be dynamically added here -->
-        </div>
-        <form id="group-message-form">
-            <input type="text" id="group-message-input" placeholder="输入消息">
-            <button type="submit">发送</button>
-        </form>
-    </section>
-
-    <!-- 联系人和在线用户列表模块 -->
-    <section id="contacts-online-section" class="module">
-        <h2>联系人和在线用户</h2>
-        <div id="contacts-online-container">
-            <div id="contacts-section">
-                <h3>联系人</h3>
-                <ul id="contact-list">
-                    <li class="contact-item">
-                        <span>Alice</span>
-                        <button onclick="sendMessage('Alice')">发送消息</button>
-                    </li>
-                    <li class="contact-item">
-                        <span>Bob</span>
-                        <button onclick="sendMessage('Bob')">发送消息</button>
-                    </li>
-                    <li class="contact-item">
-                        <span>Mary</span>
-                        <button onclick="sendMessage('Mary')">发送消息</button>
-                    </li>
-                    <li class="contact-item">
-                        <span>John</span>
-                        <button onclick="sendMessage('John')">发送消息</button>
-                    </li>
-                </ul>
-            </div>
-
-            <div id="online-users-section">
-                <h3>在线用户</h3>
-                <p id="online-count">当前在线人数: <span id="count">0</span></p>
-                <ul id="online-users-list"></ul>
-            </div>
-        </div>
-    </section>
-
-</div>
-
-<script src="scripts.js"></script>
-
+            <form id="group-message-form">
+                <input type="text" id="group-message-input" placeholder="输入消息...">
+                <button type="submit">发送</button>
+            </form>
+        </section>
+    
+        <section id="forum-section" class="module">
+            <!-- 论坛模块内容 -->
+            <h2>论坛功能</h2>
+            <!-- 论坛内容 -->
+        </section>
+    
+        <section id="calendar-section" class="module">
+            <!-- 日历模块内容 -->
+            <h2>日历功能</h2>
+            <!-- 日历内容 -->
+        </section>
+    </div>
+    
+    <script>
+        // 用户数据库
+        let userDatabase = ['Alice', 'Bob'];
+    
+        // 注册表单提交事件
+        document.getElementById('register-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const usernameInput = document.getElementById('username-input').value.trim();
+            const passwordInput = document.getElementById('password-input').value.trim();
+    
+            if (usernameInput !== '' && passwordInput !== '') {
+                if (!userDatabase.includes(usernameInput)) {
+                    // 用户名可用，保存到数据库
+                    userDatabase.push(usernameInput);
+                    alert('注册成功！');
+                    // 注册成功后自动登录
+                    login(usernameInput);
+                } else {
+                    alert('用户名已存在，请选择其他用户名！');
+                }
+            } else {
+                alert('请输入用户名和密码！');
+            }
+        });
+    
+        // 登录函数
+        function login(username) {
+            // 假设登录成功后的操作
+            alert(`欢迎回来，${username}！`);
+            // 显示所有功能模块，隐藏登录注册模块
+            showLoggedInModules();
+        }
+    
+        // 登录表单提交事件
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+    
+            // 假设这里验证用户名和密码的逻辑，省略实际验证部分
+            if (username === 'Alice' && password === '123456') {
+                login(username);
+            } else {
+                alert('用户名或密码错误！');
+            }
+        });
+    
+        // 退出登录
+        function logout() {
+            alert('已退出登录！');
+            // 隐藏所有模块，显示登录注册模块
+            document.querySelectorAll('.module').forEach(module => {
+                module.style.display = 'none';
+            });
+            document.getElementById('login-register-section').style.display = 'block';
+        }
+    
+        // 发送群聊消息事件
+        document.getElementById('group-message-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const messageInput = document.getElementById('group-message-input').value.trim();
+            if (messageInput !== '') {
+                // 发送消息的逻辑
+                appendGroupMessage('Alice', messageInput);
+                document.getElementById('group-message-input').value = '';
+            }
+        });
+    
+        // 动态添加群聊消息
+        function appendGroupMessage(username, message) {
+            const messageBox = document.getElementById('group-chat-box');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.innerHTML = `<span class="user">${username}:</span> <span class="content">${message}</span>`;
+            messageBox.appendChild(messageElement);
+            // 滚动到底部
+            messageBox.scrollTop = messageBox.scrollHeight;
+        }
+    
+        // 切换语言示例
+        let language = '中文';
+        function toggleLanguage() {
+            language = language === '中文' ? 'English' : '中文';
+            alert(`切换语言到${language}`);
+        }
+    
+        // 显示登录后的模块
+        function showLoggedInModules() {
+            document.querySelectorAll('.module').forEach(module => {
+                module.style.display = 'block'; // 显示所有模块
+            });
+        }
+    </script>
 </body>
 </html>
+
