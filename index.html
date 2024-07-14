@@ -85,7 +85,7 @@
             margin-top: 10px;
         }
         
-        input[type="text"], input[type="password"], textarea, input[type="file"] {
+        input[type="text"], input[type="password"], textarea, input[type="file"], input[type="date"] {
             margin-bottom: 10px;
             padding: 8px;
             border: 1px solid #ccc;
@@ -239,13 +239,34 @@
         <section id="forum-section" class="module">
             <!-- 论坛模块内容 -->
             <h2>论坛功能</h2>
-            <!-- 论坛内容 -->
+            <div id="forum-posts">
+                <!-- Placeholder for forum posts -->
+                <div class="forum-post">
+                    <h3>示例话题标题</h3>
+                    <p>示例话题内容。</p>
+                    <p>作者: Alice</p>
+                    <img src="placeholder.jpg" alt="示例图片">
+                </div>
+            </div>
+            <form id="forum-post-form">
+                <input type="text" id="post-title" placeholder="话题标题">
+                <textarea id="post-content" placeholder="话题内容"></textarea>
+                <input type="file" id="post-image">
+                <button type="submit">发布话题</button>
+            </form>
         </section>
     
         <section id="calendar-section" class="module">
             <!-- 日历模块内容 -->
             <h2>日历功能</h2>
-            <!-- 日历内容 -->
+            <div id="calendar">
+                <!-- 日历表格 -->
+            </div>
+            <form id="calendar-event-form">
+                <input type="date" id="event-date">
+                <input type="text" id="event-title" placeholder="事件标题">
+                <button type="submit">添加事件</button>
+            </form>
         </section>
     </div>
     
@@ -296,16 +317,6 @@
             }
         });
     
-        // 退出登录
-        function logout() {
-            alert('已退出登录！');
-            // 隐藏所有模块，显示登录注册模块
-            document.querySelectorAll('.module').forEach(module => {
-                module.style.display = 'none';
-            });
-            document.getElementById('login-register-section').style.display = 'block';
-        }
-    
         // 发送群聊消息事件
         document.getElementById('group-message-form').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -326,6 +337,81 @@
             messageBox.appendChild(messageElement);
             // 滚动到底部
             messageBox.scrollTop = messageBox.scrollHeight;
+        }
+    
+        // 发布论坛话题事件
+        document.getElementById('forum-post-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const title = document.getElementById('post-title').value.trim();
+            const content = document.getElementById('post-content').value.trim();
+            const imageFile = document.getElementById('post-image').files[0];
+    
+            if (title !== '' && content !== '') {
+                // 假设这里处理发布话题的逻辑
+                addForumPost(title, content, 'Alice', imageFile); // 假设作者为 Alice
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-content').value = '';
+                document.getElementById('post-image').value = '';
+            } else {
+                alert('请输入话题标题和内容！');
+            }
+        });
+    
+        // 添加论坛话题
+        function addForumPost(title, content, author, imageFile) {
+            const forumPosts = document.getElementById('forum-posts');
+            const postElement = document.createElement('div');
+            postElement.classList.add('forum-post');
+            postElement.innerHTML = `
+                <h3>${title}</h3>
+                <p>${content}</p>
+                <p>作者: ${author}</p>
+            `;
+    
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = event.target.result;
+                    imgElement.alt = '上传的图片';
+                    postElement.appendChild(imgElement);
+                };
+                reader.readAsDataURL(imageFile);
+            }
+    
+            forumPosts.appendChild(postElement);
+        }
+    
+        // 添加日历事件事件
+        document.getElementById('calendar-event-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const date = document.getElementById('event-date').value.trim();
+            const title = document.getElementById('event-title').value.trim();
+    
+            if (date !== '' && title !== '') {
+                // 假设这里处理添加日历事件的逻辑
+                addCalendarEvent(date, title);
+                document.getElementById('event-date').value = '';
+                document.getElementById('event-title').value = '';
+            } else {
+                alert('请选择日期并输入事件标题！');
+            }
+        });
+    
+        // 添加日历事件
+        function addCalendarEvent(date, title) {
+            // 假设这里处理添加日历事件的逻辑
+            alert(`已添加事件 "${title}" 到 ${date}`);
+        }
+    
+        // 退出登录
+        function logout() {
+            alert('已退出登录！');
+            // 隐藏所有模块，显示登录注册模块
+            document.querySelectorAll('.module').forEach(module => {
+                module.style.display = 'none';
+            });
+            document.getElementById('login-register-section').style.display = 'block';
         }
     
         // 切换语言示例
