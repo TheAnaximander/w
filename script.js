@@ -1,154 +1,58 @@
-let currentLanguage = 'zh-CN';
+// JavaScript代码
+// 请将您的所有JavaScript代码放在这里
 
-const languageText = {
-    'zh-CN': {
-        'site-title': '社交网站',
-        'chat': '聊天',
-        'forum': '论坛',
-        'calendar': '日历',
-        'switch-language': '切换语言',
-        'send': '发送',
-        'publish': '发布帖子',
-        'add-event': '添加事件',
-        'contacts': '通讯录',
-        'group-chat': '群聊',
-        'register': '注册'
-    },
-    'en': {
-        'site-title': 'Social Website',
-        'chat': 'Chat',
-        'forum': 'Forum',
-        'calendar': 'Calendar',
-        'switch-language': 'Switch Language',
-        'send': 'Send',
-        'publish': 'Publish Post',
-        'add-event': 'Add Event',
-        'contacts': 'Contacts',
-        'group-chat': 'Group Chat',
-        'register': 'Register'
-    }
-};
-
-// 初始状态：未注册用户
-let userLoggedIn = false;
-
-// 切换语言函数
+// 示例函数：切换语言
 function toggleLanguage() {
-    currentLanguage = (currentLanguage === 'zh-CN') ? 'en' : 'zh-CN';
-    updatePageLanguage();
+    // 实现切换语言的逻辑
+    console.log('切换语言');
 }
 
-// 更新页面语言函数
-function updatePageLanguage() {
-    const elementsToUpdate = document.querySelectorAll('h1, h2, [data-lang], button[type="submit"]');
-    elementsToUpdate.forEach(element => {
-        const key = element.getAttribute('data-lang');
-        if (key) {
-            element.textContent = languageText[currentLanguage][key];
-        }
-    });
+// 示例函数：退出登录
+function logout() {
+    // 实现退出登录的逻辑
+    console.log('退出登录');
 }
 
-// 加载页面时初始化数据和状态
-window.onload = function() {
-    if (!userLoggedIn) {
-        // 未注册用户只显示注册表单
-        document.getElementById('register-form').style.display = 'block';
-        document.querySelectorAll('.module').forEach(module => {
-            module.style.display = 'none';
-        });
+// 示例函数：发送消息
+function sendMessage(user) {
+    // 实现发送消息的逻辑
+    console.log('向用户 ' + user + ' 发送消息');
+}
+
+// 示例函数：添加论坛帖子
+function addForumPost(title, content, author, imageFile) {
+    // 实现添加论坛帖子的逻辑
+    console.log('添加帖子：', title, content, author, imageFile);
+}
+
+// 示例函数：渲染论坛帖子
+function renderForumPosts() {
+    // 实现渲染论坛帖子的逻辑
+    console.log('渲染论坛帖子');
+}
+
+// 示例代码：在提交表单时阻止默认行为，并调用添加论坛帖子的函数
+document.getElementById('post-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // 阻止表单默认提交行为
+
+    const title = document.getElementById('post-title').value.trim();
+    const content = document.getElementById('post-content').value.trim();
+    const author = document.getElementById('post-author').value.trim();
+    const imageFile = document.getElementById('post-image').files[0]; // 获取上传的文件
+
+    if (title !== '' && content !== '' && author !== '') {
+        addForumPost(title, content, author, imageFile);
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-content').value = '';
+        document.getElementById('post-author').value = '';
+        document.getElementById('post-image').value = ''; // 清空文件输入字段
     } else {
-        // 注册用户显示所有功能模块
-        document.getElementById('register-form').style.display = 'none';
-        document.querySelectorAll('.module').forEach(module => {
-            module.style.display = 'block';
-        });
-        // 加载其他初始化数据
-        loadChatMessages();
-        loadForumPosts();
-        loadCalendarEvents();
-        loadContactList();
-    }
-    updatePageLanguage();
-};
-
-// 注册模块
-let userDatabase = ['Alice', 'Bob']; // 初始用户数据库
-
-document.getElementById('register-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const usernameInput = document.getElementById('username-input');
-    const username = usernameInput.value.trim();
-    if (username !== '' && !userDatabase.includes(username)) {
-        userDatabase.push(username);
-        usernameInput.value = '';
-        userLoggedIn = true; // 标记用户已登录
-        // 更新通讯录
-        contactList.push({ username: username });
-        loadContactList(); // 重新加载通讯录
-        // 显示所有功能模块
-        document.getElementById('register-form').style.display = 'none';
-        document.querySelectorAll('.module').forEach(module => {
-            module.style.display = 'block';
-        });
-        // 加载其他初始化数据
-        loadChatMessages();
-        loadForumPosts();
-        loadCalendarEvents();
-    }
-});
-// 假设有一个用户数据库
-let userDatabase = ['Alice', 'Bob'];
-
-// 注册表单提交事件
-document.getElementById('register-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const usernameInput = document.getElementById('username-input').value.trim();
-    const passwordInput = document.getElementById('password-input').value.trim();
-
-    if (usernameInput !== '' && passwordInput !== '') {
-        if (!userDatabase.includes(usernameInput)) {
-            // 用户名可用，保存到数据库
-            userDatabase.push(usernameInput);
-            alert('注册成功！');
-            // 假设注册成功后自动登录
-            login(usernameInput);
-        } else {
-            alert('用户名已存在，请选择其他用户名！');
-        }
-    } else {
-        alert('请输入用户名和密码！');
+        alert('请输入帖子标题、内容和作者！');
     }
 });
 
-// 登录函数
-function login(username) {
-    // 假设登录成功后的操作
-    alert(`欢迎回来，${username}！`);
-    // 显示其他功能模块，隐藏注册表单
-    showLoggedInModules();
-}
-
-// 登录表单提交事件
-document.getElementById('login-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const username = document.getElementById('login-username').value.trim();
-    const password = document.getElementById('login-password').value.trim();
-
-    // 假设这里验证用户名和密码的逻辑，省略实际验证部分
-    if (username === 'Alice' && password === '123456') {
-        login(username);
-    } else {
-        alert('用户名或密码错误！');
-    }
+// 示例代码：在页面加载时渲染论坛帖子
+window.addEventListener('load', function() {
+    renderForumPosts();
 });
-
-// 显示登录后的功能模块
-function showLoggedInModules() {
-    document.getElementById('register-form').style.display = 'none';
-    // 假设显示其他功能模块的代码
-    document.querySelectorAll('.module').forEach(module => {
-        module.style.display = 'block';
-    });
-}
 
