@@ -14,7 +14,7 @@
         <ul>
             <li><a href="#">聊天</a></li>
             <li><a href="#">论坛</a></li>
-            <li><a href="#">日历</a></li>
+            <!-- 删除日历部分 -->
             <li><button onclick="toggleLanguage()">切换语言</button></li>
             <li><button class="logout-button" onclick="logout()">退出登录</button></li>
         </ul>
@@ -22,70 +22,6 @@
 </header>
 
 <div class="container">
-    <section id="login-register-section" class="module">
-        <h2>登录或注册</h2>
-        <form id="login-form">
-            <input type="text" id="username" placeholder="用户名">
-            <input type="password" id="password" placeholder="密码">
-            <button type="submit">登录</button>
-        </form>
-        <form id="register-form">
-            <input type="text" id="new-username" placeholder="新用户名">
-            <input type="password" id="new-password" placeholder="新密码">
-            <button type="submit">注册</button>
-        </form>
-    </section>
-
-    <section id="chat-section" class="module">
-        <h2>聊天</h2>
-        <div id="chat-box"></div>
-        <form id="message-form">
-            <input type="text" id="message-input" placeholder="输入消息">
-            <button type="submit">发送</button>
-        </form>
-    </section>
-
-    <section id="forum-section" class="module">
-        <h2>论坛</h2>
-        <div id="forum-posts"></div>
-        <form id="post-form">
-            <input type="text" id="post-title" placeholder="帖子标题">
-            <textarea id="post-content" placeholder="帖子内容"></textarea>
-            <input type="text" id="post-author" placeholder="作者">
-            <input type="file" id="post-image" accept="image/*">
-            <button type="submit">发布帖子</button>
-        </form>
-    </section>
-
-    <section id="bitcoin-transfer-section" class="module">
-        <h2>比特币转账</h2>
-        <form id="bitcoin-transfer-form">
-            <input type="text" id="bitcoin-recipient" placeholder="接收者">
-            <input type="text" id="bitcoin-amount" placeholder="金额">
-            <button type="submit">转账</button>
-        </form>
-    </section>
-
-    <section id="link-forward-section" class="module">
-        <h2>链接转发</h2>
-        <form id="link-forward-form">
-            <input type="text" id="link-recipient" placeholder="接收者">
-            <input type="text" id="link-url" placeholder="链接 URL">
-            <input type="file" id="link-file" accept="*">
-            <button type="submit">发送</button>
-        </form>
-    </section>
-
-    <!-- 群聊模块 -->
-    <section id="group-chat-section" class="module">
-        <h2>群聊</h2>
-        <div id="group-chat-box"></div>
-        <form id="group-message-form">
-            <input type="text" id="group-message-input" placeholder="输入消息">
-            <button type="submit">发送</button>
-        </form>
-    </section>
-
     <!-- 联系人和在线用户列表模块 -->
     <section id="contacts-online-section" class="module">
         <h2>联系人和在线用户</h2>
@@ -120,9 +56,31 @@
         </div>
     </section>
 
+    <!-- 比特币转账模块 -->
+    <section id="bitcoin-transfer-section" class="module">
+        <h2>比特币转账</h2>
+        <form id="bitcoin-transfer-form">
+            <input type="text" id="bitcoin-recipient" placeholder="接收者">
+            <input type="text" id="bitcoin-amount" placeholder="金额">
+            <button type="submit">转账</button>
+        </form>
+    </section>
+
+    <!-- 链接转发模块 -->
+    <section id="link-forward-section" class="module">
+        <h2>链接转发</h2>
+        <form id="link-forward-form">
+            <input type="text" id="link-recipient" placeholder="接收者">
+            <input type="text" id="link-url" placeholder="链接 URL">
+            <input type="file" id="link-file" accept="*">
+            <button type="submit">发送</button>
+        </form>
+    </section>
+
 </div>
 
 <script src="scripts.js"></script>
 
 </body>
 </html>
+
