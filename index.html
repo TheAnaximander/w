@@ -340,7 +340,28 @@
 </div>
 
 <script src="scripts.js"></script>
+    <!-- 比特币转账模块 -->
+    <section id="bitcoin-transfer-section" class="module">
+        <h2>比特币转账</h2>
+        <form id="bitcoin-transfer-form">
+            <input type="text" id="bitcoin-recipient" placeholder="接收者">
+            <input type="text" id="bitcoin-amount" placeholder="金额">
+            <button type="submit">转账</button>
+        </form>
+    </section>
 
+    <!-- 链接转发模块 -->
+    <section id="link-forward-section" class="module">
+        <h2>链接转发</h2>
+        <form id="link-forward-form">
+            <input type="text" id="link-recipient" placeholder="接收者">
+            <input type="text" id="link-url" placeholder="链接 URL">
+            <input type="file" id="link-file" accept="*">
+            <button type="submit">发送</button>
+        </form>
+    </section>
+
+</div>
 </body>
 </html>
 
