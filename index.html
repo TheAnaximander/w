@@ -271,75 +271,86 @@
 </div>
 
 <script>
-    var loggedInUsername = null;
+    // 假设这里是您的 JavaScript 文件
+    function toggleLanguage() {
+        // 切换语言的逻辑
+    }
 
-    // 监听登录表单提交事件
+    function logout() {
+        // 退出登录的逻辑
+    }
+
+    function sendMessage(contact) {
+        // 发送消息给联系人的逻辑
+    }
+
+    function postMessage() {
+        // 发布帖子的逻辑
+    }
+
+    function transferBitcoin() {
+        // 比特币转账的逻辑
+    }
+
+    function forwardLink() {
+        // 链接转发的逻辑
+    }
+
     document.getElementById('login-form').addEventListener('submit', function (event) {
         event.preventDefault();
+        // 处理登录表单提交的逻辑
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
-        // 这里模拟登录成功，实际应用中应该验证用户名密码的正确性
-        loggedInUsername = username;
+        // 示例逻辑，实际应用需要根据需求编写
         console.log('登录 用户名:', username, '密码:', password);
     });
 
-    // 监听注册表单提交事件
     document.getElementById('register-form').addEventListener('submit', function (event) {
         event.preventDefault();
+        // 处理注册表单提交的逻辑
         var newUsername = document.getElementById('new-username').value;
         var newPassword = document.getElementById('new-password').value;
-        // 这里模拟注册成功，实际应用中应该将新用户名和密码存储到数据库中
-        loggedInUsername = newUsername;
+        // 示例逻辑，实际应用需要根据需求编写
         console.log('注册 新用户名:', newUsername, '新密码:', newPassword);
     });
 
-    // 监听发送消息表单提交事件
     document.getElementById('message-form').addEventListener('submit', function (event) {
         event.preventDefault();
+        // 处理发送消息表单提交的逻辑
         var messageInput = document.getElementById('message-input').value;
-        var usernameToShow = loggedInUsername ? loggedInUsername : 'Anonymous netizen';
-        // 添加消息到聊天框
-        var chatBox = document.getElementById('chat-box');
-        var messageElement = document.createElement('div');
-        messageElement.className = 'message';
-        messageElement.innerHTML = '<span class="user">' + usernameToShow + ':</span><span class="content">' + messageInput + '</span>';
-        chatBox.appendChild(messageElement);
+        // 示例逻辑，实际应用需要根据需求编写
         console.log('发送消息:', messageInput);
     });
 
-    // 监听发布帖子表单提交事件
     document.getElementById('post-form').addEventListener('submit', function (event) {
         event.preventDefault();
+        // 处理发布帖子表单提交的逻辑
         var postTitle = document.getElementById('post-title').value;
         var postContent = document.getElementById('post-content').value;
-        var postAuthor = loggedInUsername ? loggedInUsername : 'Anonymous netizen';
-        // 添加帖子到论坛
-        var forumPosts = document.getElementById('forum-posts');
-        var postElement = document.createElement('div');
-        postElement.className = 'post';
-        postElement.innerHTML = '<h3>' + postTitle + '</h3><p>' + postContent + '</p><span class="author">作者: ' + postAuthor + '</span>';
-        forumPosts.appendChild(postElement);
+        var postAuthor = document.getElementById('post-author').value;
+        // 示例逻辑，实际应用需要根据需求编写
         console.log('发布帖子 标题:', postTitle, '内容:', postContent, '作者:', postAuthor);
     });
 
-    // 监听比特币转账表单提交事件
     document.getElementById('bitcoin-transfer-form').addEventListener('submit', function (event) {
         event.preventDefault();
+        // 处理比特币转账表单提交的逻辑
         var bitcoinRecipient = document.getElementById('bitcoin-recipient').value;
         var bitcoinAmount = document.getElementById('bitcoin-amount').value;
+        // 示例逻辑，实际应用需要根据需求编写
         console.log('比特币转账 接收者:', bitcoinRecipient, '金额:', bitcoinAmount);
     });
 
-    // 监听链接转发表单提交事件
     document.getElementById('link-forward-form').addEventListener('submit', function (event) {
         event.preventDefault();
+        // 处理链接转发表单提交的逻辑
         var linkRecipient = document.getElementById('link-recipient').value;
         var linkUrl = document.getElementById('link-url').value;
         var linkFile = document.getElementById('link-file').files[0];
+        // 示例逻辑，实际应用需要根据需求编写
         console.log('链接转发 接收者:', linkRecipient, '链接 URL:', linkUrl, '文件:', linkFile);
     });
 </script>
 
 </body>
 </html>
-
