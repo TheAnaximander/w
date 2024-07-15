@@ -233,114 +233,99 @@
             <form id="login-form">
                 <input type="text" id="username" placeholder="用户名">
                 <input type="password" id="password" placeholder="密码">
-                <button type="submit">登录</button
+                <button type="submit">登录</button>
+            </form>
+            <form id="register-form">
+                <input type="text" id="new-username" placeholder="新用户名">
+                <input type="password" id="new-password" placeholder="新密码">
+                <button type="submit">注册</button>
+            </form>
+        </section>
 
-        </form>
-        <form id="register-form">
-            <input type="text" id="new-username" placeholder="新用户名">
-            <input type="password" id="new-password" placeholder="新密码">
-            <button type="submit">注册</button>
-        </form>
-    </section>
+        <!-- 聊天模块 -->
+        <section id="chat-section" class="module">
+            <h2>聊天</h2>
+            <div id="chat-box"></div>
+            <form id="message-form">
+                <input type="text" id="message-input" placeholder="输入消息">
+                <button type="submit">发送</button>
+            </form>
+        </section>
 
-    <section id="chat-section" class="module">
-        <h2>聊天</h2>
-        <div id="chat-box"></div>
-        <form id="message-form">
-            <input type="text" id="message-input" placeholder="输入消息">
-            <button type="submit">发送</button>
-        </form>
-    </section>
+        <!-- 论坛模块 -->
+        <section id="forum-section" class="module">
+            <h2>论坛</h2>
+            <div id="forum-posts"></div>
+            <form id="post-form">
+                <input type="text" id="post-title" placeholder="帖子标题">
+                <textarea id="post-content" placeholder="帖子内容"></textarea>
+                <input type="text" id="post-author" placeholder="作者">
+                <input type="file" id="post-image" accept="image/*">
+                <button type="submit">发布帖子</button>
+            </form>
+        </section>
 
-    <section id="forum-section" class="module">
-        <h2>论坛</h2>
-        <div id="forum-posts"></div>
-        <form id="post-form">
-            <input type="text" id="post-title" placeholder="帖子标题">
-            <textarea id="post-content" placeholder="帖子内容"></textarea>
-            <input type="text" id="post-author" placeholder="作者">
-            <input type="file" id="post-image" accept="image/*">
-            <button type="submit">发布帖子</button>
-        </form>
-    </section>
+        <!-- 比特币转账模块 -->
+        <section id="bitcoin-transfer-section" class="module">
+            <h2>比特币转账</h2>
+            <form id="bitcoin-transfer-form">
+                <input type="text" id="bitcoin-recipient" placeholder="接收者">
+                <input type="text" id="bitcoin-amount" placeholder="金额">
+                <button type="submit">转账</button>
+            </form>
+        </section>
 
-    <section id="bitcoin-transfer-section" class="module">
-        <h2>比特币转账</h2>
-        <form id="bitcoin-transfer-form">
-            <input type="text" id="bitcoin-recipient" placeholder="接收者">
-            <input type="text" id="bitcoin-amount" placeholder="金额">
-            <button type="submit">转账</button>
-        </form>
-    </section>
+        <!-- 链接转发模块 -->
+        <section id="link-forward-section" class="module">
+            <h2>链接转发</h2>
+            <form id="link-forward-form">
+                <input type="text" id="link-recipient" placeholder="接收者">
+                <input type="text" id="link-url" placeholder="链接 URL">
+                <input type="file" id="link-file" accept="*">
+                <button type="submit">发送</button>
+            </form>
+        </section>
 
-    <section id="link-forward-section" class="module">
-        <h2>链接转发</h2>
-        <form id="link-forward-form">
-            <input type="text" id="link-recipient" placeholder="接收者">
-            <input type="text" id="link-url" placeholder="链接 URL">
-            <input type="file" id="link-file" accept="*">
-            <button type="submit">发送</button>
-        </form>
-    </section>
-
-    <!-- 群聊模块 -->
-    <section id="group-chat-section" class="module">
-        <h2>群聊</h2>
-        <div id="group-chat-box">
-            <div class="message">
-                <span class="user">Alice:</span>
-                <span class="content">你好吗？</span>
+        <!-- 群聊模块 -->
+        <section id="group-chat-section" class="module">
+            <h2>群聊</h2>
+            <div id="group-chat-box">
+                <!-- Messages will be dynamically added here -->
             </div>
-            <div class="message">
-                <span class="user">Bob:</span>
-                <span class="content">很好，谢谢！</span>
+            <form id="group-message-form">
+                <input type="text" id="group-message-input" placeholder="输入消息">
+                <button type="submit">发送</button>
+            </form>
+        </section>
+
+        <!-- 联系人和在线用户列表模块 -->
+        <section id="contacts-online-section" class="module">
+            <h2>联系人和在线用户</h2>
+            <div id="contacts-online-container">
+                <div id="contacts-section">
+                    <h3>联系人</h3>
+                    <ul id="contact-list">
+                        <!-- Contact list items will be dynamically added here -->
+                    </ul>
+                </div>
+
+                <div id="online-users-section">
+                    <h3>在线用户</h3>
+                    <p id="online-count">当前在线人数: <span id="count">0</span></p>
+                    <ul id="online-users-list"></ul>
+                </div>
             </div>
-            <!-- Messages will be dynamically added here -->
-        </div>
-        <form id="group-message-form">
-            <input type="text" id="group-message-input" placeholder="输入消息">
-            <button type="submit">发送</button>
-        </form>
-    </section>
+        </section>
 
-    <!-- 联系人和在线用户列表模块 -->
-    <section id="contacts-online-section" class="module">
-        <h2>联系人和在线用户</h2>
-        <div id="contacts-online-container">
-            <div id="contacts-section">
-                <h3>联系人</h3>
-                <ul id="contact-list">
-                    <li class="contact-item">
-                        <span>Alice</span>
-                        <button onclick="sendMessage('Alice')">发送消息</button>
-                    </li>
-                    <li class="contact-item">
-                        <span>Bob</span>
-                        <button onclick="sendMessage('Bob')">发送消息</button>
-                    </li>
-                    <li class="contact-item">
-                        <span>Mary</span>
-                        <button onclick="sendMessage('Mary')">发送消息</button>
-                    </li>
-                    <li class="contact-item">
-                        <span>John</span>
-                        <button onclick="sendMessage('John')">发送消息</button>
-                    </li>
-                </ul>
-            </div>
+    </div>
 
-            <div id="online-users-section">
-                <h3>在线用户</h3>
-                <p id="online-count">当前在线人数: <span id="count">0</span></p>
-                <ul id="online-users-list"></ul>
-            </div>
-        </div>
-    </section>
-
-</div>
-
-<script src="scripts.js"></script>
+    <script>
+        // Your JavaScript code here
+        // Functionality for login, registration, chat, forum, bitcoin transfer, link forwarding, etc.
+        // Ensure all necessary JavaScript logic is included here.
+    </script>
 
 </body>
+
 </html>
 
