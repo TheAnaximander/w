@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Friendship Talks</title>
+    <title>Friendship talks</title>
     <style>
         /* Reset default browser styles */
-        body, h1, h2, h3, p, ul, li, button, input, textarea {
+        body,
+        h1,
+        h2,
+        h3,
+        p,
+        ul,
+        li,
+        button,
+        input,
+        textarea {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Arial', sans-serif;
         }
-        
+
         /* Overall page styling */
         body {
             background-color: #f0f2f5;
@@ -23,7 +33,7 @@
             font-size: 16px;
             line-height: 1.6;
         }
-        
+
         .container {
             width: 100%;
             max-width: 800px;
@@ -33,7 +43,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-        
+
         header {
             width: 100%;
             padding: 10px 0;
@@ -42,12 +52,12 @@
             text-align: center;
             border-radius: 8px 8px 0 0;
         }
-        
+
         header h1 {
             font-size: 24px;
             margin-bottom: 10px;
         }
-        
+
         nav ul {
             list-style-type: none;
             padding: 0;
@@ -55,17 +65,17 @@
             display: flex;
             justify-content: center;
         }
-        
+
         nav ul li {
             margin: 0 10px;
         }
-        
+
         nav ul li a {
             color: #ffffff;
             text-decoration: none;
             font-size: 18px;
         }
-        
+
         .module {
             margin-top: 20px;
             padding: 20px;
@@ -73,26 +83,29 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-        
+
         .module h2 {
             font-size: 20px;
             margin-bottom: 15px;
         }
-        
+
         form {
             display: flex;
             flex-direction: column;
             margin-top: 10px;
         }
-        
-        input[type="text"], input[type="password"], textarea, input[type="file"] {
+
+        input[type="text"],
+        input[type="password"],
+        textarea,
+        input[type="file"] {
             margin-bottom: 10px;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 16px;
         }
-        
+
         button {
             padding: 10px 20px;
             background-color: #4267B2;
@@ -102,27 +115,27 @@
             cursor: pointer;
             font-size: 16px;
         }
-        
+
         button:hover {
             background-color: #3b5998;
         }
-        
+
         .message {
             margin-bottom: 10px;
             padding: 8px;
             background-color: #f0f2f5;
             border-radius: 4px;
         }
-        
+
         .message .user {
             font-weight: bold;
             margin-right: 5px;
         }
-        
+
         .message .content {
             color: #1c1e21;
         }
-        
+
         #group-chat-box {
             max-height: 300px;
             overflow-y: auto;
@@ -132,20 +145,20 @@
             border-radius: 4px;
             margin-top: 10px;
         }
-        
+
         #group-chat-box .message {
             margin-bottom: 5px;
         }
-        
+
         #online-users-list {
             list-style-type: none;
             padding: 0;
         }
-        
+
         #online-users-list li {
             margin-bottom: 5px;
         }
-        
+
         .contact-item {
             display: flex;
             justify-content: space-between;
@@ -155,11 +168,11 @@
             background-color: #f0f2f5;
             border-radius: 4px;
         }
-        
+
         .contact-item span {
             font-weight: bold;
         }
-        
+
         .contact-item button {
             padding: 8px 16px;
             background-color: #4267B2;
@@ -169,7 +182,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        
+
         .contact-item button:hover {
             background-color: #3b5998;
         }
@@ -196,161 +209,179 @@
         }
     </style>
 </head>
+
 <body>
 
-<header>
-    <h1>Friendship Talks</h1>
-    <nav>
-        <ul>
-            <li><a href="#">聊天</a></li>
-            <li><a href="#">论坛</a></li>
-            <li><a href="#">日历</a></li>
-            <li><button onclick="toggleLanguage()">切换语言</button></li>
-            <li><button class="logout-button" onclick="logout()">退出登录</button></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <h1>Friendship Talks</h1>
+        <nav>
+            <ul>
+                <li><a href="#">聊天</a></li>
+                <li><a href="#">论坛</a></li>
+                <li><a href="#">日历</a></li>
+                <li><button onclick="toggleLanguage()">切换语言</button></li>
+                <li><button class="logout-button" onclick="logout()">退出登录</button></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="container">
-    <section id="login-register-section" class="module">
-        <h2>登录或注册</h2>
-        <form id="login-form">
-            <input type="text" id="username" placeholder="用户名">
-            <input type="password" id="password" placeholder="密码">
-            <button type="submit">登录</button>
-        </form>
-        <form id="register-form">
-            <input type="text" id="new-username" placeholder="新用户名">
-            <input type="password" id="new-password" placeholder="新密码">
-            <button type="submit">注册</button>
-        </form>
-    </section>
+    <div class="container">
 
-    <section id="chat-section" class="module">
-        <h2>聊天</h2>
-        <div id="chat-box"></div>
-        <form id="message-form">
-            <input type="text" id="message-input" placeholder="输入消息">
-            <button type="submit">发送</button>
-        </form>
-    </section>
+        <!-- 登录或注册模块 -->
+        <section id="login-register-section" class="module show-if-logged-out">
+            <h2>登录或注册</h2>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="">
+                <input type="password" id="password" placeholder="">
+                <button type="submit">登录</button>
+            </form>
+            <form id="register-form">
+                <input type="text" id="new-username" placeholder="">
+                <input type="password" id="new-password" placeholder="">
+                <button type="submit">注册</button>
+            </form>
+        </section>
 
-    <section id="forum-section" class="module">
-        <h2>论坛</h2>
-        <div id="forum-posts"></div>
-        <form id="post-form">
-            <input type="text" id="post-title" placeholder="帖子标题">
-            <textarea id="post-content" placeholder="帖子内容"></textarea>
-            <input type="text" id="post-author" placeholder="作者">
-            <input type="file" id="post-image" accept="image/*">
-            <button type="submit">发布帖子</button>
-        </form>
-    </section>
+        <!-- 聊天模块 -->
+        <section id="chat-section" class="module hide-if-logged-out">
+            <h2>聊天</h2>
+            <div id="chat-box"></div>
+            <form id="message-form">
+                <input type="text" id="message-input" placeholder="">
+                <button type="submit">发送</button>
+            </form>
+        </section>
 
-    <!-- 比特币转账模块 -->
-    <section id="bitcoin-transfer-section" class="module">
-        <h2>比特币转账</h2>
-        <form id="bitcoin-transfer-form">
-            <input type="text" id="bitcoin-recipient" placeholder="接收者">
-            <input type="text" id="bitcoin-amount" placeholder="金额">
-            <button type="submit">转账</button>
-        </form>
-    </section>
+        <!-- 论坛模块 -->
+        <section id="forum-section" class="module hide-if-logged-out">
+            <h2>论坛</h2>
+            <div id="forum-posts"></div>
+            <form id="post-form">
+                <input type="text" id="post-title" placeholder="">
+                <textarea id="post-content" placeholder=""></textarea>
+                <input type="text" id="post-author" placeholder="">
+                <input type="file" id="post-image" accept="image/*">
+                <button type="submit">发布帖子</button>
+            </form>
+        </section>
 
-    <!-- 链接转发模块 -->
-    <section id="link-forward-section" class="module">
-        <h2>链接转发</h2>
-        <form id="link-forward-form">
-            <input type="text" id="link-recipient" placeholder="接收者">
-            <input type="text" id="link-url" placeholder="链接 URL">
-            <input type="file" id="link-file" accept="*">
-            <button type="submit">发送</button>
-        </form>
-    </section>
+        <!-- 比特币转账模块 -->
+        <section id="bitcoin-transfer-section" class="module hide-if-logged-out">
+            <h2>比特币转账</h2>
+            <form id="bitcoin-transfer-form">
+                <input type="text" id="bitcoin-recipient" placeholder="">
+                <input type="text" id="bitcoin-amount" placeholder="">
+                <button type="submit">转账</button>
+            </form>
+        </section>
 
-</div>
+        <!-- 链接转发模块 -->
+        <section id="link-forward-section" class="module hide-if-logged-out">
+            <h2>链接转发</h2>
+            <form id="link-forward-form">
+                <input type="text" id="link-recipient" placeholder="">
+                <input type="text" id="link-url" placeholder="">
+                <input type="file" id="link-file" accept="*">
+                <button type="submit">发送</button>
+            </form>
+        </section>
 
-<script>
-    // 假设这里是您的 JavaScript 文件
-    function toggleLanguage() {
-        // 切换语言的逻辑
-    }
+        <!-- 群聊模块 -->
+        <section id="group-chat-section" class="module hide-if-logged-out">
+            <h2>群聊</h2>
+            <div id="group-chat-box">
+                <!-- Messages will be dynamically added here -->
+            </div>
+            <form id="group-message-form">
+                <input type="text" id="group-message-input" placeholder="">
+                <button type="submit">发送</button>
+            </form>
+        </section>
 
-    function logout() {
-        // 退出登录的逻辑
-    }
+        <!-- 联系人和在线用户列表模块 -->
+        <section id="contacts-online-section" class="module hide-if-logged-out">
+            <h2>联系人和在线用户</h2>
+            <div id="contacts-online-container">
+                <div id="contacts-section">
+                    <h3>联系人</h3>
+                    <ul id="contact-list">
+                        <!-- Contact list items will be dynamically added here -->
+                    </ul>
+                </div>
 
-    function sendMessage(contact) {
-        // 发送消息给联系人的逻辑
-    }
+                <div id="online-users-section">
+                    <h3>在线用户</h3>
+                    <p id="online-count">当前在线人数: <span id="count">0</span></p>
+                    <ul id="online-users-list"></ul>
+                </div>
+            </div>
+        </section>
 
-    function postMessage() {
-        // 发布帖子的逻辑
-    }
+    </div>
 
-    function transferBitcoin() {
-        // 比特币转账的逻辑
-    }
+    <script>
+        // Your JavaScript code here
+        // Functionality for login, registration, chat, forum, bitcoin transfer, link forwarding, etc.
+        // Ensure all necessary JavaScript logic is included here.
 
-    function forwardLink() {
-        // 链接转发的逻辑
-    }
+        // Mock user data (replace with actual authentication logic)
+        let currentUser = null; // Current logged in user
 
-    document.getElementById('login-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        // 处理登录表单提交的逻辑
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-        // 示例逻辑，实际应用需要根据需求编写
-        console.log('登录 用户名:', username, '密码:', password);
-    });
+        // Function to check if user is logged in
+        function isLoggedIn() {
+            return currentUser !== null;
+        }
 
-    document.getElementById('register-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        // 处理注册表单提交的逻辑
-        var newUsername = document.getElementById('new-username').value;
-        var newPassword = document.getElementById('new-password').value;
-        // 示例逻辑，实际应用需要根据需求编写
-        console.log('注册 新用户名:', newUsername, '新密码:', newPassword);
-    });
+        // Function to toggle visibility based on login status
+        function toggleVisibility() {
+            const sections = document.querySelectorAll('.module');
+            sections.forEach(section => {
+                if (section.classList.contains('hide-if-logged-out')) {
+                    section.style.display = isLoggedIn() ? 'block' : 'none';
+                }
+                if (section.classList.contains('show-if-logged-out')) {
+                    section.style.display = isLoggedIn() ? 'none' : 'block';
+                }
+            });
+        }
 
-    document.getElementById('message-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        // 处理发送消息表单提交的逻辑
-        var messageInput = document.getElementById('message-input').value;
-        // 示例逻辑，实际应用需要根据需求编写
-        console.log('发送消息:', messageInput);
-    });
+        // Function to handle login
+        function login(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            // Simulate login logic (replace with actual authentication)
+            currentUser = username; // Set current user
+            toggleVisibility(); // Update UI visibility
+            updateWelcomeMessage(); // Update welcome message
+        }
 
-    document.getElementById('post-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        // 处理发布帖子表单提交的逻辑
-        var postTitle = document.getElementById('post-title').value;
-        var postContent = document.getElementById('post-content').value;
-        var postAuthor = document.getElementById('post-author').value;
-        // 示例逻辑，实际应用需要根据需求编写
-        console.log('发布帖子 标题:', postTitle, '内容:', postContent, '作者:', postAuthor);
-    });
+        // Function to handle logout
+        function logout() {
+            currentUser = null; // Clear current user
+            toggleVisibility(); // Update UI visibility
+            updateWelcomeMessage(); // Update welcome message
+        }
 
-    document.getElementById('bitcoin-transfer-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        // 处理比特币转账表单提交的逻辑
-        var bitcoinRecipient = document.getElementById('bitcoin-recipient').value;
-        var bitcoinAmount = document.getElementById('bitcoin-amount').value;
-        // 示例逻辑，实际应用需要根据需求编写
-        console.log('比特币转账 接收者:', bitcoinRecipient, '金额:', bitcoinAmount);
-    });
+        // Function to update welcome message based on login status
+        function updateWelcomeMessage() {
+            const welcomeMessage = document.getElementById('welcome-message');
+            if (isLoggedIn()) {
+                welcomeMessage.textContent = `欢迎您，${currentUser}！`;
+            } else {
+                welcomeMessage.textContent = `欢迎您，匿名网民！`;
+            }
+        }
 
-    document.getElementById('link-forward-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        // 处理链接转发表单提交的逻辑
-        var linkRecipient = document.getElementById('link-recipient').value;
-        var linkUrl = document.getElementById('link-url').value;
-        var linkFile = document.getElementById('link-file').files[0];
-        // 示例逻辑，实际应用需要根据需求编写
-        console.log('链接转发 接收者:', linkRecipient, '链接 URL:', linkUrl, '文件:', linkFile);
-    });
-</script>
+        // Attach event listeners
+        document.getElementById('login-form').addEventListener('submit', login);
+        document.getElementById('register-form').addEventListener('submit', login);
+        document.querySelector('.logout-button').addEventListener('click', logout);
+
+        // Initialize visibility based on login status
+        toggleVisibility();
+        updateWelcomeMessage();
+    </script>
 
 </body>
+
 </html>
