@@ -165,7 +165,6 @@
             background-color: #4267B2;
             color: white;
             border: none;
-            border-radius:
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease;
@@ -288,97 +287,73 @@
 
         // 更新联系人列表
         function updateContactList() {
-            var contactListSelect = document.getElementById('contact-list');
-            contactListSelect.innerHTML = '<option value="">选择联系人</option>';
+            var contactList = document.getElementById('contact-list');
+            contactList.innerHTML = '<option value="">选择联系人</option>';
             registeredUsers.forEach(function(user) {
-                var option = document.createElement('option');
-                option.value = user;
-                option.textContent = user;
-                contactListSelect.appendChild(option);
+                if (user !== loggedInUsername) {
+                    var option = document.createElement('option');
+                    option.value = user;
+                    option.textContent = user;
+                    contactList.appendChild(option);
+                }
             });
         }
 
-        // 处理群聊消息表单提交
-        document.getElementById('group-message-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var groupMessageInput = document.getElementById('group-message-input').value;
-            var usernameToShow = loggedInUsername ? loggedInUsername : '匿名用户';
-            var groupChatBox = document.getElementById('group-chat-box');
-            var messageElement = document.createElement('div');
-            messageElement.className = 'message';
-            messageElement.innerHTML = '<span class="user">' + escapeHtml(usernameToShow) + ':</span><span class="content">' + escapeHtml(groupMessageInput) + '</span>';
-            groupChatBox.appendChild(messageElement);
-            console.log('发送群聊消息:', groupMessageInput);
+        // 表单提交处理
+        document.getElementById('group-message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var message = document.getElementById('group-message-input').value;
+            var messageBox = document.getElementById('group-chat-box');
+            messageBox.innerHTML += `<div class="message"><span class="user">${loggedInUsername}:</span><span class="content">${message}</span></div>`;
+            document.getElementById('group-message-input').value = '';
         });
 
-        // 处理私聊消息表单提交
-        document.getElementById('private-message-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var privateMessageInput = document.getElementById('private-message-input').value;
-            var privateRecipient = document.getElementById('contact-list').value;
-            var usernameToShow = loggedInUsername ? loggedInUsername : '匿名用户';
-            var privateChatBox = document.getElementById('private-chat-box');
-            var messageElement = document.createElement('div');
-            messageElement.className = 'message';
-            messageElement.innerHTML = '<span class="user">' + escapeHtml(usernameToShow) + ':</span><span class="content">' + escapeHtml(privateMessageInput) + '</span>';
-            privateChatBox.appendChild(messageElement);
-            console.log('发送私聊消息给', privateRecipient, ':', privateMessageInput);
+        document.getElementById('private-message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var recipient = document.getElementById('contact-list').value;
+            var message = document.getElementById('private-message-input').value;
+            var messageBox = document.getElementById('private-chat-box');
+            messageBox.innerHTML += `<div class="message"><span class="user">${loggedInUsername} (私聊 ${recipient}):</span><span class="content">${message}</span></div>`;
+            document.getElementById('private-message-input').value = '';
         });
 
-        // 处理发布帖子表单提交
-        document.getElementById('post-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var postTitle = document.getElementById('post-title').value;
-            var postContent = document.getElementById('post-content').value;
-            var postAuthor = loggedInUsername ? loggedInUsername : '匿名用户';
-            var forumPosts = document.getElementById('forum-posts');
-            var postElement = document.createElement('div');
-            postElement.className = 'post';
-            postElement.innerHTML = '<h3>' + escapeHtml(postTitle) + '</h3><p>' + escapeHtml(postContent) + '</p><span class="author">作者: ' + escapeHtml(postAuthor) + '</span>';
-            forumPosts.appendChild(postElement);
-            console.log('发布帖子 标题:', postTitle, '内容:', postContent, '作者:', postAuthor);
+        document.getElementById('post-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var title = document.getElementById('post-title').value;
+            var content = document.getElementById('post-content').value;
+            var author = document.getElementById('post-author').value;
+            var postsDiv = document.getElementById('forum-posts');
+            postsDiv.innerHTML += `<div class="post"><h3>${title}</h3><p>${content}</p><p><strong>作者:</strong> ${author}</p></div>`;
+            document.getElementById('post-form').reset();
         });
 
-        // 处理比特币转账表单提交
-        document.getElementById('bitcoin-transfer-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var bitcoinRecipient = document.getElementById('bitcoin-recipient').value;
-            var bitcoinAmount = document.getElementById('bitcoin-amount').value;
-            console.log('比特币转账 接收者:', bitcoinRecipient, '金额:', bitcoinAmount);
+        document.getElementById('bitcoin-transfer-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var recipient = document.getElementById('bitcoin-recipient').value;
+            var amount = document.getElementById('bitcoin-amount').value;
+            console.log(`转账 ${amount} BTC 到 ${recipient}`);
+            alert(`转账 ${amount} BTC 到 ${recipient}`);
+            document.getElementById('bitcoin-transfer-form').reset();
         });
 
-        // 处理链接转发表单提交
-        document.getElementById('link-forward-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var linkRecipient = document.getElementById('link-recipient').value;
-            var linkUrl = document.getElementById('link-url').value;
-            var linkFile = document.getElementById('link-file').files[0];
-            console.log('链接转发 接收者:', linkRecipient, '链接 URL:', linkUrl, '文件:', linkFile);
+        document.getElementById('link-forward-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var recipient = document.getElementById('link-recipient').value;
+            var url = document.getElementById('link-url').value;
+            console.log(`将链接 ${url} 转发给 ${recipient}`);
+            alert(`将链接 ${url} 转发给 ${recipient}`);
+            document.getElementById('link-forward-form').reset();
         });
 
-        // 转义 HTML 特殊字符
-        function escapeHtml(text) {
-            return text.replace(/&/g, "&amp;")
-                       .replace(/</g, "&lt;")
-                       .replace(/>/g, "&gt;")
-                       .replace(/"/g, "&quot;")
-                       .replace(/'/g, "&#039;");
-        }
-
-        // 模拟用户登录后的用户名
-        function logout() {
-            onlineUsers = [];
-            updateOnlineUsers();
-            console.log('已退出登录');
-        }
-
+        // 切换语言功能（模拟）
         function toggleLanguage() {
-            alert('切换语言...');
+            alert('切换语言功能尚未实现');
         }
 
-        // 初始化页面时更新在线用户列表和联系人列表
-        updateOnlineUsers();
-        updateContactList();
+        // 退出登录功能（模拟）
+        function logout() {
+            alert('退出登录功能尚未实现');
+        }
     </script>
 </body>
 </html>
